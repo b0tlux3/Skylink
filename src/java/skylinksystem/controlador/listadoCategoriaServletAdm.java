@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import skylinksystem.dao.CategoriaAdm;
-import skylinksystem.modelo.Categoria;
+import skylinksystem.vo.Categoria;
 
 public class listadoCategoriaServletAdm extends HttpServlet {
 

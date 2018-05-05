@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
-import skylinksystem.modelo.Categoria;
+import skylinksystem.vo.Categoria;
 
 public class CategoriaAdm {
 

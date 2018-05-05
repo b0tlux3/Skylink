@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import skylinksystem.dao.UsuarioAdm;
-import skylinksystem.modelo.Usuario;
+import skylinksystem.dao.UserValidateAdmSQLOra;
+import skylinksystem.vo.Usuario;
 
 public class listadoUsuarioServletAdm extends HttpServlet {
 
@@ -24,7 +24,7 @@ public class listadoUsuarioServletAdm extends HttpServlet {
         
         if (session != null) {
 
-            UsuarioAdm usuarioAdm = new UsuarioAdm();
+            UserValidateAdmSQLOra usuarioAdm = new UserValidateAdmSQLOra();
             ArrayList<Usuario> listaUsuario = usuarioAdm.getListaUsuario();
             request.setAttribute("alistaUsuario", listaUsuario);
             RequestDispatcher dispatcher = request.getRequestDispatcher("jsp/listaUsuarioAdm.jsp");

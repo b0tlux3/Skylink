@@ -13,6 +13,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import skylinksystem.dao.Conexion;
+import skylinksystem.dao.IUserValidateAdm;
+import skylinksystem.dao.UserValidateAdmSQLOra;
+import skylinksystem.vo.Usuario;
 
 public class loginServlet2 extends HttpServlet {
 
@@ -37,10 +40,37 @@ public class loginServlet2 extends HttpServlet {
             throws ServletException, IOException {
 
         response.setContentType("text/html;charset=UTF-8");
-
+        String username = request.getParameter("uname");
+        String password = request.getParameter("pass");
+        
+        IUserValidateAdm userValidateAdm = new UserValidateAdmSQLOra();
+        Usuario usuarioObjeto = userValidateAdm.validarUsuario(username, password);
+        
+        if (usuarioObjeto != null) {
+            String tipoUsuario = usuarioObjeto.getTipoUsuario();
+            if(tipoUsuario.equalsIgnoreCase("ADMIN")){
+                System.out.println("Login Successful");
+                HttpSession session = request.getSession(true);
+                session.setAttribute("user", username);
+                session.setMaxInactiveInterval(60); // 30 seconds
+                response.sendRedirect("jsp/menuPrincipalAdm.jsp");
+            }else if(tipoUsuario.equalsIgnoreCase("USER")){
+                System.out.println("Login Successful");
+                    HttpSession session = request.getSession(true);
+                    session.setAttribute("user", username);
+                    session.setMaxInactiveInterval(30); // 30 seconds
+                    response.sendRedirect("jsp/menuPrincipalUser.jsp");
+            }else if (tipoUsuario.equalsIgnoreCase("SUPER")){
+                
+            }
+            
+        }else{
+            System.out.println("Contraseña Incorrecta...");
+                response.sendRedirect("index.jsp");
+        }
+        /*
         try {
-            String username = request.getParameter("uname");
-            String password = request.getParameter("pass");
+
             PreparedStatement pst = conn.prepareStatement("Select s.USUARIO_NAME, s.USUARIO_PASSWORD, c.TIPO_NAME From (users) s, (user_roles) c Where s.TIPO_ID = c.TIPO_ID and s.USUARIO_NAME=? and s.USUARIO_PASSWORD=? and c.TIPO_NAME=?");
             pst.setString(1, username);
             pst.setString(2, password);
@@ -83,8 +113,9 @@ public class loginServlet2 extends HttpServlet {
                 out.println("</body>");
                 out.println("</html>");
             }
-            
+
         }
+        */
 
     }
 

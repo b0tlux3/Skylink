@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import skylinksystem.dao.ProductoAdm;
-import skylinksystem.modelo.Producto;
+import skylinksystem.vo.Producto;
 
 public class listadoProductoServletAdm extends HttpServlet {
 

@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import skylinksystem.dao.Conexion;
 import skylinksystem.dao.ProductoAdm;
-import skylinksystem.modelo.Producto;
+import skylinksystem.vo.Producto;
 
 public class deleteProductoServlet extends HttpServlet {
 

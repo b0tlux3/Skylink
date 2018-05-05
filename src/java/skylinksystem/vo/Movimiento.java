@@ -1,5 +1,5 @@
 
-package skylinksystem.modelo;
+package skylinksystem.vo;
 
 public class Movimiento {
     

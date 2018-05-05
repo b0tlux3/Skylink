@@ -5,7 +5,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
-import skylinksystem.modelo.Producto;
+import skylinksystem.vo.Producto;
 
 public class ProductoAdm {
     public ArrayList<Producto> getListaProducto(){

@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package skylinksystem.modelo;
+package skylinksystem.dao;
 
 /**
  *
- * @author Usuario-Clone0
+ * @author Docente
  */
-public class Documento {
+public interface IMantenimientoProductosAdm {
     
 }

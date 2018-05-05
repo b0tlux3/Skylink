@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import skylinksystem.dao.MovimientoAdm;
-import skylinksystem.modelo.Movimiento;
+import skylinksystem.vo.Movimiento;
 
 public class listaMovimientoServletAdm extends HttpServlet {
 

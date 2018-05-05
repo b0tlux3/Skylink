@@ -5,7 +5,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
-import skylinksystem.modelo.Movimiento;
+import skylinksystem.vo.Movimiento;
 
 public class MovimientoAdm {
     
