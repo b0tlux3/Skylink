@@ -44,6 +44,18 @@
         <servlet-name>EnviarEditarProductoServlet</servlet-name>
         <servlet-class>skylinksystem.controlador.EnviarEditarProductoServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddUsuarioServletAdm</servlet-name>
+        <servlet-class>skylinksystem.controlador.AddUsuarioServletAdm</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>productoControllerAdm</servlet-name>
+        <servlet-class>skylinksystem.controlador.productoControllerAdm</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>categoriaControllerAdm</servlet-name>
+        <servlet-class>skylinksystem.controlador.categoriaControllerAdm</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>listadoProductoServletUser</servlet-name>
         <url-pattern>/listadoProductoServletUser</url-pattern>
@@ -87,6 +99,18 @@
     <servlet-mapping>
         <servlet-name>EnviarEditarProductoServlet</servlet-name>
         <url-pattern>/EnviarEditarProductoServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddUsuarioServletAdm</servlet-name>
+        <url-pattern>/AddUsuarioServletAdm</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>productoControllerAdm</servlet-name>
+        <url-pattern>/productoControllerAdm</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>categoriaControllerAdm</servlet-name>
+        <url-pattern>/categoriaControllerAdm</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

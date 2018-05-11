@@ -5,6 +5,9 @@
  */
 package skylinksystem.dao;
 
+import java.util.ArrayList;
+import skylinksystem.vo.Categoria;
+
 
 /**
  *
@@ -12,7 +15,13 @@ package skylinksystem.dao;
  */
 public interface IMantenimientoCategoriaAdm {
     
-    
+     public ArrayList getListaCategoria();
+
+    public int insertCategoria(Categoria cat);
+
+    public int updateCategoria(Categoria cat);
+
+    public int deleteCategoria(Categoria cat);
     
     
     

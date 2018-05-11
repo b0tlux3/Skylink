@@ -1,10 +1,16 @@
-<%@page import="skylinksystem.modelo.Producto"%>
+<%@page import="skylinksystem.vo.Producto"%>
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
 
 <!DOCTYPE html>
+<%
+	//Usuario busuario = session.getAttribute("bUsuario")!=null?(Usuario)session.getAttribute("bUsuario"):new Usuario();
+           if (session != null) {
+                if (session.getAttribute("bUsuario") != null) {
+                    String name = (String) session.getAttribute("bUsuario");
+          %>  
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -13,10 +19,7 @@
     </head>
     <body>
         <%
-            if (session != null) {
-                if (session.getAttribute("user") != null) {
-                    String name = (String) session.getAttribute("user");
-                    ArrayList<Producto> listaProducto = (ArrayList) request.getAttribute("plistaProducto");
+           ArrayList<Producto> listaProducto =  (ArrayList)request.getAttribute("alistaProducto");
         %>  
 
         <h1 align = "center"> Consulta de Productos Admin - Skylink </h1>
@@ -24,7 +27,7 @@
 
         <p align= "center" >
             <a href = "jsp/menuPrincipalAdm.jsp" class = "btn btn-primary " > <span class = "glyphicon glyphicon-home" aria-hidden = "true"> </span> Menu Principal </a>
-            <a href = "jsp/AddProductoAdm.jsp" class = "btn btn-success"> <span class = "fas fa-plus" aria-hidden = "true"> </span> Agregar Productos </a>
+            <a href = "./jsp/AddProductoAdm.jsp" class = "btn btn-success"> <span class = "fas fa-plus" aria-hidden = "true"> </span> Agregar Productos </a>
         </p>
         <br>
 
@@ -77,16 +80,17 @@
                 <td>
                     <table>
                         <tr>
-                        <form method="POST" action="./deleteProductoServlet">
-                            <button colspan="2" align="center" type="submit" name="code" value="<%=codigo%>" class="btn btn-danger btn-md" style="margin-right:  10px;"><span class="pull-right hidden-xs showopacity far fa-trash-alt"></span></button>
+                        <form method="POST" action="./productoControllerAdm">
+                            <input type="hidden" name="accion" value = "goEliminarProducto">
+                            <button colspan="2" align="center" type="submit" name="idProd" value="<%=codigo%>" class="btn btn-danger btn-md" style="margin-right:  10px;"><span class="pull-right hidden-xs showopacity far fa-trash-alt"></span></button>
 
                         </form>
-                        <form method="POST" action="./EnviarEditarProductoServlet">
-                              <input type="hidden" name="codProd" value="<%=codigo%>">
+                        <form method="POST" action="jsp/EditProductoAdm.jsp">
+                              <input type="hidden" name="idProd" value="<%=codigo%>">
                               <input type="hidden" name="descProd" value="<%=descripcion%>">
                               <input type="hidden" name="preProd" value="<%=precio%>">
                               <input type="hidden" name="stockProd" value="<%=stock%>">
-                              <input type="hidden" name="idCatProd" value="<%=idCategoria%>">
+                              <input type="hidden" name="catProd" value="<%=idCategoria%>">
 
                             <button colspan="2" align="center" type="submit" name="producto" class="btn btn-warning btn-md"><span class="pull-right hidden-xs showopacity fa fa-edit" ></span></button>
                         </form>

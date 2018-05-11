@@ -1,3 +1,4 @@
+<%@page import="skylinksystem.vo.Usuario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
@@ -20,8 +21,8 @@
 
         <%
             if (session != null) {
-                if (session.getAttribute("user") != null) {
-                    String name = (String) session.getAttribute("user");
+                if (session.getAttribute("bUsuario") != null) {
+                    String name = (String) session.getAttribute("bUsuario");
         %>
 
         <div class="collapse navbar-collapse navbar-fixed-top" id="bs-example-navbar-collapse-1">
@@ -60,7 +61,7 @@
                             <li ><button colspan="2" align="center" type="submit" value="Ingresar" class="btn btn-primary btn-md" style="width: 100%;">Movimientos<span style="font-size:16px;padding-left:15px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-search"></span></button></li>
                         </form>
 
-                        <li ><a href="logout.jsp" class="btn btn-primary btn-md" style="font-size:14px;">Logout<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-log-out"></span></a></li>
+                        <li ><a href="jsp/logout.jsp" class="btn btn-primary btn-md" style="font-size:14px;">Logout<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-log-out"></span></a></li>
 
                     </ul>
                 </div>
@@ -223,7 +224,7 @@
             </li>
         </ul>
 
-        <%
+    <%
                 } else {
                     response.sendRedirect("../index.jsp");
                 }

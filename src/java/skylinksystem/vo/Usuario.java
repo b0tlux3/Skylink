@@ -6,6 +6,15 @@ public class Usuario {
     String userName;
     String userPass;
     String tipoUsuario;
+    String activo;
+
+    public String getActivo() {
+        return activo;
+    }
+
+    public void setActivo(String activo) {
+        this.activo = activo;
+    }
 
     public String getTipoUsuario() {
         return tipoUsuario;
