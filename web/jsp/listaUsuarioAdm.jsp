@@ -24,7 +24,7 @@
           
           <h1 align = "center"> Consulta de Usuarios ADM - Skylink </h1>
                 <br>
-                <p>
+                <p align= "center">
                     <a href = "http://localhost:8082/SkylinkWeb2/jsp/menuPrincipalAdm.jsp" class = "btn btn-success"> <span class = "glyphicon glyphicon-th-list" aria-hidden = "true"> </span> Menu Principal </a>
                     <a href = "./jsp/AddUsuarioAdm.jsp" class = "btn btn-danger"> <span class = "glyphicon glyphicon-pencil" aria-hidden = "true"> </span> Agregar Usuarios </a>
                 </p>

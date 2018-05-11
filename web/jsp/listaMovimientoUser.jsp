@@ -1,4 +1,4 @@
-<%@page import="skylinksystem.modelo.Movimiento"%>
+<%@page import="skylinksystem.vo.Movimiento"%>
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -11,10 +11,10 @@
     <body>
         <%
             if (session != null) {
-                if (session.getAttribute("user") != null) {
-                    String name = (String) session.getAttribute("user");
+                if (session.getAttribute("bUsuariob") != null) {
+                    String name = (String) session.getAttribute("bUsuariob");
                     //out.print("Hello, " + name + "  Welcome to ur Profileasaaaaaaaaaa");
-                    ArrayList<Movimiento> listaMovimiento = (ArrayList) request.getAttribute("alistaMovimiento");
+                    ArrayList<Movimiento> listaMovimiento = (ArrayList) request.getAttribute("alistaMovimientoUser");
         %>  
 
         <h1 align = "center"> Consulta de Movimientos USER - Skylink </h1>

@@ -41,7 +41,8 @@
                     </form>
                 </li>
                 <li>
-                    <form method="POST" action="../listaMovimientoServletAdm">
+                    <form method="POST" action="http://localhost:8082/SkylinkWeb2/movimientoControllerAdm">
+                        <input type="hidden" name="accion" value = "goListadoMovimiento">
                         <li ><button colspan="2" align="center" type="submit" value="Ingresar" class="btn btn-primary btn-md">Movimientos<span class="pull-right hidden-xs showopacity fas fa-dollar-sign"></span></button></li>
                     </form>
                 </li>

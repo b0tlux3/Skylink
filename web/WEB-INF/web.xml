@@ -56,6 +56,10 @@
         <servlet-name>categoriaControllerAdm</servlet-name>
         <servlet-class>skylinksystem.controlador.categoriaControllerAdm</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>movimientoControllerAdm</servlet-name>
+        <servlet-class>skylinksystem.controlador.movimientoControllerAdm</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>listadoProductoServletUser</servlet-name>
         <url-pattern>/listadoProductoServletUser</url-pattern>
@@ -111,6 +115,10 @@
     <servlet-mapping>
         <servlet-name>categoriaControllerAdm</servlet-name>
         <url-pattern>/categoriaControllerAdm</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>movimientoControllerAdm</servlet-name>
+        <url-pattern>/movimientoControllerAdm</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

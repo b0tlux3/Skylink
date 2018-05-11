@@ -108,7 +108,21 @@ public class productoControllerAdm extends HttpServlet {
                 dispatcher.forward(request, response);      
             //processRequest(request, response);
             
-        }else{
+        }else if(accion.equalsIgnoreCase("goListadoProductoUser")){
+            IMantenimientoProductosAdm prodAdm = new MantenimientoProductosAdmSQLOra();
+             ArrayList<Producto> listProducto = prodAdm.getListaProducto();
+                System.out.println("en goListadoProducto");
+                request.setAttribute("alistaProductoUser", listProducto);
+                
+                RequestDispatcher dispatcher = request.getRequestDispatcher("jsp/listaProductosUser.jsp");
+
+                dispatcher.forward(request, response);      
+            //processRequest(request, response);
+            
+        }
+        
+        
+        else{
             processRequest(request, response);
         }
         

@@ -59,7 +59,7 @@ public class loginServlet2 extends HttpServlet {
             } else if (tipoUsuario.equalsIgnoreCase("USER")) {
                 System.out.println("Login Successful");
                 HttpSession session = request.getSession(true);
-                session.setAttribute("bUsuario", tipoUsuario);
+                session.setAttribute("bUsuariob", tipoUsuario);
                 session.setMaxInactiveInterval(30); // 30 seconds
                 RequestDispatcher dispatcher = request.getRequestDispatcher("jsp/menuPrincipalUser.jsp");
                 dispatcher.forward(request, response);

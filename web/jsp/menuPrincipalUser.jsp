@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
 
 <!-- Fonts -->
 <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800,300' rel='stylesheet' type='text/css'>
@@ -21,8 +22,8 @@
 
         <%
             if (session != null) {
-                if (session.getAttribute("bUsuario") != null) {
-                    String name = (String) session.getAttribute("bUsuario");
+                if (session.getAttribute("bUsuariob") != null) {
+                    String name = (String) session.getAttribute("bUsuariob");
         %>
 
         <div class="collapse navbar-collapse navbar-fixed-top" id="bs-example-navbar-collapse-1">
@@ -51,17 +52,22 @@
                     </button>      
                 </div>
                 <div class="sidebar-nav" id="bs-sidebar-navbar-collapse-1">
-                    <ul class="nav">
-                        <li class="active" align="center" style="background-color:#0066ff;"><a style="color:white;">Menu User<span style="font-size:16px; color:white;" class="pull-right hidden-xs showopacity glyphicon glyphicon-home"></span></a></li>
-                        <form method="POST" action="../listadoProductoServletUser">
-                            <li ><button colspan="2" align="center" type="submit" value="Ingresar" class="btn btn-primary btn-md" style="width: 100%;">Productos<span style="font-size:16px;padding-left:15px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-search"></span></button></li>
-                        </form>
+                    <ul class="nav navbar-center">
+                        <li class="active" align="center" style="background-color:#0066ff;"><a style="color:white;">Menu User<span style="font-size:14px; color:white; padding-right:8px; margin-left: 1px;" class="pull-left hidden-xs showopacity glyphicon glyphicon-home"></span></a></li>
+                        <li>
+                    <form method="POST" action="http://localhost:8082/SkylinkWeb2/productoControllerAdm">
+                         <input type="hidden" name="accion" value = "goListadoProductoUser">
+                        <li ><button colspan="2" align="center" type="submit" value="Ingresar" class="btn btn-primary btn-md" style="text-align: left; padding-right: 18px;">Productos<span class="pull-left hidden-xs showopacity fas fa-th-large" style="font-size:14px; color:white; padding-right:8px; margin-left: 1px;"></span></button></li>
+                    </form>
+                </li>
+                        <li>
+                    <form method="POST" action="http://localhost:8082/SkylinkWeb2/movimientoControllerAdm">
+                        <input type="hidden" name="accion" value = "goListadoMovimientoUser">
+                        <li ><button colspan="2" align="center" type="submit" value="Ingresar" class="btn btn-primary btn-md" style="text-align: right; padding-right: 10px;">Movimientos<span class="pull-left hidden-xs showopacity fas fa-dollar-sign" style="font-size:14px; color:white; padding-right:8px; margin-left: 1px;"></span></button></li>
+                    </form>
+                </li>
 
-                        <form method="POST" action="../listadoMovimientoServletUser">
-                            <li ><button colspan="2" align="center" type="submit" value="Ingresar" class="btn btn-primary btn-md" style="width: 100%;">Movimientos<span style="font-size:16px;padding-left:15px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-search"></span></button></li>
-                        </form>
-
-                        <li ><a href="jsp/logout.jsp" class="btn btn-primary btn-md" style="font-size:14px;">Logout<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-log-out"></span></a></li>
+                        <li ><a href="http://localhost:8082/SkylinkWeb2/jsp/logout.jsp" class="btn btn-primary btn-md" style="font-size:14px; text-align: left; padding-right: 10px;">Logout<span style="font-size:14px; color:white; padding-right:8px; margin-left: 0px;" class="pull-left hidden-xs showopacity glyphicon glyphicon-log-out"></span></a></li>
 
                     </ul>
                 </div>

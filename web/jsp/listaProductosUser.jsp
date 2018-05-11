@@ -1,6 +1,6 @@
 
+<%@page import="skylinksystem.vo.Producto"%>
 <%@page import="skylinksystem.dao.ProductoAdm"%>
-<%@page import="skylinksystem.modelo.Producto"%>
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -13,10 +13,10 @@
     <body>
         <%
             if (session != null) {
-                if (session.getAttribute("user") != null) {
-                    String name = (String) session.getAttribute("user");
+                if (session.getAttribute("bUsuariob") != null) {
+                    String name = (String) session.getAttribute("bUsuariob");
 
-                    ArrayList<Producto> listaProducto = (ArrayList) request.getAttribute("alistaProducto");
+                    ArrayList<Producto> listaProducto = (ArrayList) request.getAttribute("alistaProductoUser");
         %>  
 
         <h1 align = "center"> Consulta de Productos - Skylink </h1>
@@ -78,45 +78,6 @@
             %>
 
         </table>
-
-        <h1 align = "center"> Consulta de Productos Sin BD- Skylink </h1>
-        <br>
-
-        <table class = "table table-bordered table-striped table-hover">
-            <thead>
-                <tr>
-                    <th> ID </th>
-                    <th> Descripcion </th>
-                    <th> Precio </th>
-                    <th> Stock </th>
-                    <th> Categoria </th>
-
-                </tr>
-
-                <%
-                    ProductoAdm producto = new ProductoAdm();
-                    ArrayList<Producto> listaProducto1 = producto.getListaProductoSinBD();
-                %>
-            </thead>
-            <%
-                for (int i = 0; i < listaProducto1.size(); i++) {
-            %>
-            <tr>
-                <td><%=listaProducto1.get(i).getCodigoProducto()%></td>
-                <td><%=listaProducto1.get(i).getDescripcion()%></td>
-                <td><%=listaProducto1.get(i).getIdCategoria()%></td>
-                <td><%=listaProducto1.get(i).getPrecioProducto()%></td>
-                <td><%=listaProducto1.get(i).getStockProducto()%></td>
-            </tr>
-            <%
-                }
-            %>
-        </table>
-
-
-
-
-
 
         <%
                 } else {

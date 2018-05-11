@@ -13,21 +13,26 @@
     </head>
     <body>
         <h1>Hello World!</h1>
+        
         <%
+            /*
             if (session != null) {
                 if (session.getAttribute("bUsuario") != null) {
                     String name = (String) session.getAttribute("bUsuario");
-            
+            */
             
             
             
             session.invalidate();
         %>
          <%
+             /*
                 } else {
                     response.sendRedirect("../index.jsp");
                 }
+
             }
+*/
         %>   
         <h1><font color="Black">You are Sucessfully logged out...</font></h1>
         <a href="../index.jsp">Ir al Login</a>
