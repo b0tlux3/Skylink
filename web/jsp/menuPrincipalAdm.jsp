@@ -69,9 +69,11 @@
 
       <%
                 } else {
-                    response.sendRedirect("../index.jsp");
+                    response.sendRedirect("http://localhost:8082/SkylinkWeb2/index.jsp");
                 }
-            }
+            }else {
+                    response.sendRedirect("http://localhost:8082/SkylinkWeb2/index.jsp");
+                }
         %>   
 
     </body>

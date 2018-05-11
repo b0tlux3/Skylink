@@ -52,7 +52,7 @@ public class loginServlet2 extends HttpServlet {
                 System.out.println("Login Successful");
                 HttpSession session = request.getSession(true);
                 session.setAttribute("bUsuario", tipoUsuario);
-                session.setMaxInactiveInterval(60); // 30 seconds
+                session.setMaxInactiveInterval(60); // 60 seconds
                 RequestDispatcher dispatcher = request.getRequestDispatcher("jsp/menuPrincipalAdm.jsp");
                 dispatcher.forward(request, response);
                 // response.sendRedirect("jsp/menuPrincipalAdm.jsp");
@@ -60,7 +60,7 @@ public class loginServlet2 extends HttpServlet {
                 System.out.println("Login Successful");
                 HttpSession session = request.getSession(true);
                 session.setAttribute("bUsuariob", tipoUsuario);
-                session.setMaxInactiveInterval(30); // 30 seconds
+                session.setMaxInactiveInterval(30); // 60 seconds
                 RequestDispatcher dispatcher = request.getRequestDispatcher("jsp/menuPrincipalUser.jsp");
                 dispatcher.forward(request, response);
                 //response.sendRedirect("jsp/menuPrincipalUser.jsp");
@@ -70,7 +70,7 @@ public class loginServlet2 extends HttpServlet {
 
         } else {
             System.out.println("Contraseña Incorrecta...");
-            response.sendRedirect("index.jsp");
+            response.sendRedirect("http://localhost:8082/SkylinkWeb2/index.jsp");
         }
 
     }

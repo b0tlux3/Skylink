@@ -34,6 +34,7 @@
                             <th> Usuario </th>
                             <th> Producto </th>
                             <th> Cantidad </th>
+                            <th> Accion </th>
                             
                         </tr>
                     </thead>
