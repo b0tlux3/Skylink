@@ -1,0 +1,115 @@
+drop table USER_ROLES;
+drop table USERS;
+drop table DOCUMENTO;
+drop table CATEGORIA;
+drop table PRODUCTO;
+drop table MOVIMIENTO;
+=================================
+-- 1 --
+CREATE TABLE USER_ROLES
+(
+TIPO_ID char(3) not null PRIMARY KEY,
+TIPO_NAME varchar2(10) not null
+);
+insert into user_roles values ('100', 'USER');
+insert into user_roles values ('200', 'ADMIN');
+-- 1 --
+=================================
+=================================
+-- 2 --
+CREATE TABLE USERS
+(
+USUARIO_ID varchar2(6) PRIMARY KEY not null,
+USUARIO_NAME varchar2(20) not null,
+USUARIO_PASSWORD varchar2(20) not null,
+TIPO_ID char(3) not null,
+ACTIVO char(1) not null
+
+);
+ALTER TABLE USERS ADD CONSTRAINT fk_users FOREIGN KEY (TIPO_ID) REFERENCES USER_ROLES(TIPO_ID);
+INSERT INTO USERS VALUES ('1000','upnuser','12345','100','1');
+INSERT INTO USERS VALUES ('1001','admin','qwerty','200','1');
+INSERT INTO USERS VALUES ('1002','upnprueba','123','100','1');
+INSERT INTO USERS VALUES ('1003','upnadmin','qwerty','200','1');
+
+-- 2 --
+=================================
+=================================
+-- 3 --
+CREATE TABLE DOCUMENTO(
+id_documento char(4) not null,
+tipo_documento varchar(10) null,
+PRIMARY KEY (id_documento)
+);
+INSERT INTO DOCUMENTO VALUES ('100','Ingreso');
+INSERT INTO DOCUMENTO VALUES ('200','Egreso');
+-- 3 --
+=================================
+=================================
+-- 4 --
+CREATE TABLE CATEGORIA(
+id_categoria char(1) null,
+nom_categoria varchar2(40) null,
+activo char(1) null,
+PRIMARY KEY (id_categoria)
+);
+INSERT INTO CATEGORIA VALUES ('1','Dispositivo-Pasivo','1');
+INSERT INTO CATEGORIA VALUES ('2','Dispositivo-Activo','1');
+-- 4 --
+=================================
+=================================
+-- 5 --
+CREATE SEQUENCE "PRODUCTO_SEQ1"  MINVALUE 1001 MAXVALUE 999999999999999 INCREMENT BY 1 START WITH 1001 NOCACHE  NOORDER  NOCYCLE ;
+
+CREATE trigger PRODUCTO_T1
+  before insert on PRODUCTO              
+  for each row 
+begin  
+  if :NEW.codigo_producto is null then
+    select PRODUCTO_SEQ1.nextval into :NEW.codigo_producto from dual;
+  end if;
+end;
+
+CREATE TABLE PRODUCTO(
+codigo_producto char(4) not null,
+nombre_producto varchar(50) null,
+precio_producto varchar(10) null,
+stock_producto varchar(6) null,
+id_categoria char(1) null,
+activo char(1) null,
+PRIMARY KEY (codigo_producto)
+CONSTRAINT fk_producto FOREIGN KEY (id_categoria) REFERENCES categoria(id_categoria);
+
+);
+
+INSERT INTO PRODUCTO VALUES(PRODUCTO_SEQ1.NEXTVAL, '1000Base-SX GBIC,MMF,850nm,550M','17.55', '100', '1','1');
+INSERT INTO PRODUCTO VALUES (PRODUCTO_SEQ1.NEXTVAL,'1000Base-SX GBIC,MMF,850nm,550M','21.60','10','1','1');
+INSERT INTO PRODUCTO VALUES (PRODUCTO_SEQ1.NEXTVAL,'1000Base-T GBIC,Copper','36.00','122','2','1');
+INSERT INTO PRODUCTO VALUES (PRODUCTO_SEQ1.NEXTVAL,'1000Base-ZX SFP,SMF,1550nm,70KM','96.00','190','1','1');
+INSERT INTO PRODUCTO VALUES (PRODUCTO_SEQ1.NEXTVAL,'10GBASE-ZR XENPAK Module for SMF,1550nm,80KM','1800.00','100','1','1');
+INSERT INTO PRODUCTO VALUES (PRODUCTO_SEQ1.NEXTVAL,'1000Base-LX GBIC,SMF,1310nm,10KM','22.43','25','1','1');
+INSERT INTO PRODUCTO VALUES (PRODUCTO_SEQ1.NEXTVAL,'1000Base-ZX GBIC,SMF,1550nm,70km','81.90','45','1','1');
+INSERT INTO PRODUCTO VALUES (PRODUCTO_SEQ1.NEXTVAL,'1000Base-ZX GBIC,SMF,1550nm,120km','113.10','6','1','1');
+INSERT INTO PRODUCTO VALUES (PRODUCTO_SEQ1.NEXTVAL,'1000Base-SX SFP,MMF,850nm,550M','15.60','22','1','1');
+INSERT INTO PRODUCTO VALUES (PRODUCTO_SEQ1.NEXTVAL,'1000Base-LX SFP,SMF,1310nm,10KM','21.45','113','1','1');
+INSERT INTO PRODUCTO VALUES (PRODUCTO_SEQ1.NEXTVAL,'1000BASE-BX-D SFP,TX1490/RX1310,LC','31.20','18','1','0');
+-- 5 --
+=================================
+=================================
+-- 6 --
+CREATE TABLE MOVIMIENTO(
+id_movimiento char(4) not null,
+numero_documento char(4) not null,
+fecha varchar(10) null,
+usuario char(1) not null,
+codigo_producto char(4) not null,
+cantidad char(10),
+activo char(1) null,
+CONSTRAINT pk_movimiento PRIMARY KEY (id_movimiento,numero_documento),
+CONSTRAINT fk_usuario FOREIGN KEY (usuario) REFERENCES USUARIO(id_usuario),
+CONSTRAINT fk_codprod FOREIGN KEY (codigo_producto) REFERENCES PRODUCTO(codigo_producto)
+);
+INSERT INTO MOVIMIENTO VALUES ('100','2001','25/03/2018','1','1001','5','1');
+INSERT INTO MOVIMIENTO VALUES ('200','2002','26/03/2018','2','1002','4','1');
+-- 6 --
+=====================================================
