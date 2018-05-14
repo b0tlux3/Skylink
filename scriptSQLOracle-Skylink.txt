@@ -1,115 +1,137 @@
-drop table USER_ROLES;
-drop table USERS;
-drop table DOCUMENTO;
-drop table CATEGORIA;
-drop table PRODUCTO;
-drop table MOVIMIENTO;
+drop table TBSKYLINK_USERSROLES;
+drop table TBSKYLINK_USERS;
+drop table TBSKYLINK_DOCUMENTO;
+drop table TBSKYLINK_CATEGORIA;
+drop table TBSKYLINK_PRODUCTO;
+drop table TBSKYLINK_MOVIMIENTO;
+drop table TBSKYLINK_USUARIO;
+
 =================================
 -- 1 --
-CREATE TABLE USER_ROLES
+CREATE TABLE TBSKYLINK_USERSROLES
 (
 TIPO_ID char(3) not null PRIMARY KEY,
 TIPO_NAME varchar2(10) not null
 );
-insert into user_roles values ('100', 'USER');
-insert into user_roles values ('200', 'ADMIN');
+begin
+insert into TBSKYLINK_USERSROLES values ('100', 'USER');
+insert into TBSKYLINK_USERSROLES values ('200', 'ADMIN');
+end;
 -- 1 --
 =================================
 =================================
 -- 2 --
-CREATE TABLE USERS
+CREATE TABLE TBSKYLINK_USERS
 (
 USUARIO_ID varchar2(6) PRIMARY KEY not null,
 USUARIO_NAME varchar2(20) not null,
 USUARIO_PASSWORD varchar2(20) not null,
 TIPO_ID char(3) not null,
 ACTIVO char(1) not null
-
 );
-ALTER TABLE USERS ADD CONSTRAINT fk_users FOREIGN KEY (TIPO_ID) REFERENCES USER_ROLES(TIPO_ID);
-INSERT INTO USERS VALUES ('1000','upnuser','12345','100','1');
-INSERT INTO USERS VALUES ('1001','admin','qwerty','200','1');
-INSERT INTO USERS VALUES ('1002','upnprueba','123','100','1');
-INSERT INTO USERS VALUES ('1003','upnadmin','qwerty','200','1');
-
+ALTER TABLE TBSKYLINK_USERS ADD CONSTRAINT fk_TBSKYLINK_USERS FOREIGN KEY (TIPO_ID) REFERENCES TBSKYLINK_USERSROLES(TIPO_ID);
+begin
+INSERT INTO TBSKYLINK_USERS VALUES ('1000','upnuser','12345','100','1');
+INSERT INTO TBSKYLINK_USERS VALUES ('1001','admin','qwerty','200','1');
+INSERT INTO TBSKYLINK_USERS VALUES ('1002','upnprueba','123','100','1');
+INSERT INTO TBSKYLINK_USERS VALUES ('1003','upnadmin','qwerty','200','1');
+end;
 -- 2 --
 =================================
 =================================
 -- 3 --
-CREATE TABLE DOCUMENTO(
+CREATE TABLE TBSKYLINK_DOCUMENTO(
 id_documento char(4) not null,
 tipo_documento varchar(10) null,
 PRIMARY KEY (id_documento)
 );
-INSERT INTO DOCUMENTO VALUES ('100','Ingreso');
-INSERT INTO DOCUMENTO VALUES ('200','Egreso');
+begin
+INSERT INTO TBSKYLINK_DOCUMENTO VALUES ('100','Ingreso');
+INSERT INTO TBSKYLINK_DOCUMENTO VALUES ('200','Egreso');
+end;
 -- 3 --
 =================================
 =================================
 -- 4 --
-CREATE TABLE CATEGORIA(
+CREATE TABLE TBSKYLINK_CATEGORIA(
 id_categoria char(1) null,
 nom_categoria varchar2(40) null,
 activo char(1) null,
 PRIMARY KEY (id_categoria)
 );
-INSERT INTO CATEGORIA VALUES ('1','Dispositivo-Pasivo','1');
-INSERT INTO CATEGORIA VALUES ('2','Dispositivo-Activo','1');
+begin
+INSERT INTO TBSKYLINK_CATEGORIA VALUES ('1','Dispositivo-Pasivo','1');
+INSERT INTO TBSKYLINK_CATEGORIA VALUES ('2','Dispositivo-Activo','1');
+end;
 -- 4 --
 =================================
 =================================
 -- 5 --
-CREATE SEQUENCE "PRODUCTO_SEQ1"  MINVALUE 1001 MAXVALUE 999999999999999 INCREMENT BY 1 START WITH 1001 NOCACHE  NOORDER  NOCYCLE ;
+CREATE SEQUENCE TBSKYLINK_PRODUCTO_SEQ1  MINVALUE 1001 MAXVALUE 999999999999999 INCREMENT BY 1 START WITH 1001 NOCACHE  NOORDER  NOCYCLE ;
 
-CREATE trigger PRODUCTO_T1
-  before insert on PRODUCTO              
-  for each row 
-begin  
-  if :NEW.codigo_producto is null then
-    select PRODUCTO_SEQ1.nextval into :NEW.codigo_producto from dual;
-  end if;
-end;
-
-CREATE TABLE PRODUCTO(
+CREATE TABLE TBSKYLINK_PRODUCTO(
 codigo_producto char(4) not null,
 nombre_producto varchar(50) null,
 precio_producto varchar(10) null,
 stock_producto varchar(6) null,
 id_categoria char(1) null,
 activo char(1) null,
-PRIMARY KEY (codigo_producto)
-CONSTRAINT fk_producto FOREIGN KEY (id_categoria) REFERENCES categoria(id_categoria);
-
+PRIMARY KEY (codigo_producto),
+CONSTRAINT fk_producto FOREIGN KEY (id_categoria) REFERENCES TBSKYLINK_CATEGORIA(id_categoria)
 );
 
-INSERT INTO PRODUCTO VALUES(PRODUCTO_SEQ1.NEXTVAL, '1000Base-SX GBIC,MMF,850nm,550M','17.55', '100', '1','1');
-INSERT INTO PRODUCTO VALUES (PRODUCTO_SEQ1.NEXTVAL,'1000Base-SX GBIC,MMF,850nm,550M','21.60','10','1','1');
-INSERT INTO PRODUCTO VALUES (PRODUCTO_SEQ1.NEXTVAL,'1000Base-T GBIC,Copper','36.00','122','2','1');
-INSERT INTO PRODUCTO VALUES (PRODUCTO_SEQ1.NEXTVAL,'1000Base-ZX SFP,SMF,1550nm,70KM','96.00','190','1','1');
-INSERT INTO PRODUCTO VALUES (PRODUCTO_SEQ1.NEXTVAL,'10GBASE-ZR XENPAK Module for SMF,1550nm,80KM','1800.00','100','1','1');
-INSERT INTO PRODUCTO VALUES (PRODUCTO_SEQ1.NEXTVAL,'1000Base-LX GBIC,SMF,1310nm,10KM','22.43','25','1','1');
-INSERT INTO PRODUCTO VALUES (PRODUCTO_SEQ1.NEXTVAL,'1000Base-ZX GBIC,SMF,1550nm,70km','81.90','45','1','1');
-INSERT INTO PRODUCTO VALUES (PRODUCTO_SEQ1.NEXTVAL,'1000Base-ZX GBIC,SMF,1550nm,120km','113.10','6','1','1');
-INSERT INTO PRODUCTO VALUES (PRODUCTO_SEQ1.NEXTVAL,'1000Base-SX SFP,MMF,850nm,550M','15.60','22','1','1');
-INSERT INTO PRODUCTO VALUES (PRODUCTO_SEQ1.NEXTVAL,'1000Base-LX SFP,SMF,1310nm,10KM','21.45','113','1','1');
-INSERT INTO PRODUCTO VALUES (PRODUCTO_SEQ1.NEXTVAL,'1000BASE-BX-D SFP,TX1490/RX1310,LC','31.20','18','1','0');
+CREATE trigger TBSKYLINK_PRODUCTO_T1
+  before insert on TBSKYLINK_PRODUCTO              
+  for each row 
+begin  
+  if :NEW.codigo_producto is null then
+    select TBSKYLINK_PRODUCTO_SEQ1.nextval into :NEW.codigo_producto from dual;
+  end if;
+end;
+
+begin
+INSERT INTO TBSKYLINK_PRODUCTO VALUES (TBSKYLINK_PRODUCTO_SEQ1.NEXTVAL, '1000Base-SX GBIC,MMF,850nm,550M','17.55', '100', '1','1');
+INSERT INTO TBSKYLINK_PRODUCTO VALUES (TBSKYLINK_PRODUCTO_SEQ1.NEXTVAL,'1000Base-SX GBIC,MMF,850nm,550M','21.60','10','1','1');
+INSERT INTO TBSKYLINK_PRODUCTO VALUES (TBSKYLINK_PRODUCTO_SEQ1.NEXTVAL,'1000Base-T GBIC,Copper','36.00','122','2','1');
+INSERT INTO TBSKYLINK_PRODUCTO VALUES (TBSKYLINK_PRODUCTO_SEQ1.NEXTVAL,'1000Base-ZX SFP,SMF,1550nm,70KM','96.00','190','1','1');
+INSERT INTO TBSKYLINK_PRODUCTO VALUES (TBSKYLINK_PRODUCTO_SEQ1.NEXTVAL,'10GBASE-ZR XENPAK Module for SMF,1550nm,80KM','1800.00','100','1','1');
+INSERT INTO TBSKYLINK_PRODUCTO VALUES (TBSKYLINK_PRODUCTO_SEQ1.NEXTVAL,'1000Base-LX GBIC,SMF,1310nm,10KM','22.43','25','1','1');
+INSERT INTO TBSKYLINK_PRODUCTO VALUES (TBSKYLINK_PRODUCTO_SEQ1.NEXTVAL,'1000Base-ZX GBIC,SMF,1550nm,70km','81.90','45','1','1');
+INSERT INTO TBSKYLINK_PRODUCTO VALUES (TBSKYLINK_PRODUCTO_SEQ1.NEXTVAL,'1000Base-ZX GBIC,SMF,1550nm,120km','113.10','6','1','1');
+INSERT INTO TBSKYLINK_PRODUCTO VALUES (TBSKYLINK_PRODUCTO_SEQ1.NEXTVAL,'1000Base-SX SFP,MMF,850nm,550M','15.60','22','1','1');
+INSERT INTO TBSKYLINK_PRODUCTO VALUES (TBSKYLINK_PRODUCTO_SEQ1.NEXTVAL,'1000Base-LX SFP,SMF,1310nm,10KM','21.45','113','1','1');
+INSERT INTO TBSKYLINK_PRODUCTO VALUES (TBSKYLINK_PRODUCTO_SEQ1.NEXTVAL,'1000BASE-BX-D SFP,TX1490/RX1310,LC','31.20','18','1','0');
+end;
 -- 5 --
 =================================
 =================================
 -- 6 --
-CREATE TABLE MOVIMIENTO(
+CREATE TABLE TBSKYLINK_USUARIO(
+id_usuario char(1) not null PRIMARY KEY,
+usuario varchar(10) null
+);
+begin
+INSERT INTO TBSKYLINK_USUARIO VALUES ('1','Jefe');
+INSERT INTO TBSKYLINK_USUARIO VALUES ('2','Supervisor');
+end;
+-- 6 --
+=================================
+-- 7 --
+CREATE TABLE TBSKYLINK_MOVIMIENTO(
 id_movimiento char(4) not null,
 numero_documento char(4) not null,
 fecha varchar(10) null,
-usuario char(1) not null,
+id_usuario char(1) not null,
 codigo_producto char(4) not null,
 cantidad char(10),
 activo char(1) null,
 CONSTRAINT pk_movimiento PRIMARY KEY (id_movimiento,numero_documento),
-CONSTRAINT fk_usuario FOREIGN KEY (usuario) REFERENCES USUARIO(id_usuario),
-CONSTRAINT fk_codprod FOREIGN KEY (codigo_producto) REFERENCES PRODUCTO(codigo_producto)
+CONSTRAINT fk_usuario FOREIGN KEY (id_usuario) REFERENCES TBSKYLINK_USUARIO(id_usuario),
+CONSTRAINT fk_codprod FOREIGN KEY (codigo_producto) REFERENCES TBSKYLINK_PRODUCTO(codigo_producto)
 );
-INSERT INTO MOVIMIENTO VALUES ('100','2001','25/03/2018','1','1001','5','1');
-INSERT INTO MOVIMIENTO VALUES ('200','2002','26/03/2018','2','1002','4','1');
--- 6 --
+begin
+INSERT INTO TBSKYLINK_MOVIMIENTO VALUES ('100','2001','25/03/2018','1','1001','5','1');
+INSERT INTO TBSKYLINK_MOVIMIENTO VALUES ('200','2002','26/03/2018','2','1002','4','1');
+end;
+-- 7 --
 =====================================================
