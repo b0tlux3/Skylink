@@ -12,11 +12,8 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Estima usuario: <%=
-            request.getParameter("pusername")
-            %></h1>
+        <h1></h1>
             
-            <p><%=request.getParameter("pmensaje")
-                %></p>
+            <p>Contraseña incorrecta</p>
     </body>
 </html>

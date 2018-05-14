@@ -27,7 +27,7 @@ public class MantenimientoUsuarioAdmSQLOra implements IMantenimientoUsuarioAdm{
         
         try {
             Statement st = conn.createStatement();
-            ResultSet rs = st.executeQuery("Select s.usuario_id, s.usuario_name, s.usuario_password, c.tipo_name From (users) s, (user_roles) c Where s.TIPO_ID = c.TIPO_ID and s.activo='1' order by s.usuario_id");
+            ResultSet rs = st.executeQuery("Select s.usuario_id, s.usuario_name, s.usuario_password, c.tipo_name From (TBSKYLINK_USERS) s, (TBSKYLINK_USERSROLES) c Where s.TIPO_ID = c.TIPO_ID and s.activo='1' order by s.usuario_id");
             
             while (rs.next()) {                
                 Usuario usuario = new Usuario();
@@ -55,7 +55,7 @@ public class MantenimientoUsuarioAdmSQLOra implements IMantenimientoUsuarioAdm{
             Conexion conecta = new Conexion();
             Connection conn = conecta.getConnection();        
 
-            String sql = "INSERT INTO users (usuario_id,usuario_name,usuario_password,tipo_id, activo) VALUES (?,?,?,?,?)";
+            String sql = "INSERT INTO TBSKYLINK_USERS (usuario_id,usuario_name,usuario_password,tipo_id, activo) VALUES (?,?,?,?,?)";
             
             try {
              PreparedStatement ps = conn.prepareStatement(sql);
@@ -83,7 +83,7 @@ public class MantenimientoUsuarioAdmSQLOra implements IMantenimientoUsuarioAdm{
             Conexion conecta = new Conexion();
             Connection conn = conecta.getConnection();        
 
-            String sql = "update users set usuario_name=?, usuario_password=?, tipo_id=? where usuario_id=?";
+            String sql = "update TBSKYLINK_USERS set usuario_name=?, usuario_password=?, tipo_id=? where usuario_id=?";
             
             try {
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -110,7 +110,7 @@ public class MantenimientoUsuarioAdmSQLOra implements IMantenimientoUsuarioAdm{
             Conexion conecta = new Conexion();
             Connection conn = conecta.getConnection();        
 
-            String sql = "update users set activo=? where usuario_id=?";
+            String sql = "update TBSKYLINK_USERS set activo=? where usuario_id=?";
             try {
             PreparedStatement ps = conn.prepareStatement(sql);
                 ps.setString(1, "0");

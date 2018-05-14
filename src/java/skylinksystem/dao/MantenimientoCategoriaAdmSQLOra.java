@@ -18,7 +18,7 @@ public class MantenimientoCategoriaAdmSQLOra implements IMantenimientoCategoriaA
 
         try {
             Statement st = conn.createStatement();
-            ResultSet rs = st.executeQuery("select id_categoria, nom_categoria from categoria where activo='1'");
+            ResultSet rs = st.executeQuery("select id_categoria, nom_categoria from TBSKYLINK_CATEGORIA where activo='1'");
 
             while (rs.next()) {
                 Categoria categoria = new Categoria();
@@ -44,7 +44,7 @@ public class MantenimientoCategoriaAdmSQLOra implements IMantenimientoCategoriaA
         Conexion conecta = new Conexion();
         Connection conn = conecta.getConnection();
 
-        String sql = "insert into categoria values (?,?,?)";
+        String sql = "insert into TBSKYLINK_CATEGORIA values (?,?,?)";
 
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -71,7 +71,7 @@ public class MantenimientoCategoriaAdmSQLOra implements IMantenimientoCategoriaA
         Conexion conecta = new Conexion();
         Connection conn = conecta.getConnection();
 
-        String sql = "update categoria set nom_categoria=? where id_categoria=?";
+        String sql = "update TBSKYLINK_CATEGORIA set nom_categoria=? where id_categoria=?";
 
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -97,7 +97,7 @@ public class MantenimientoCategoriaAdmSQLOra implements IMantenimientoCategoriaA
         Conexion conecta = new Conexion();
         Connection conn = conecta.getConnection();
 
-        String sql = "update categoria set activo=? where id_categoria=?";
+        String sql = "update TBSKYLINK_CATEGORIA set activo=? where id_categoria=?";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, "0");

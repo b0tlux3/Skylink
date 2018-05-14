@@ -27,7 +27,7 @@ public class MantenimientoProductosAdmSQLOra implements IMantenimientoProductosA
           
           try {
              Statement st = conn.createStatement();
-            ResultSet rs = st.executeQuery("Select s.codigo_producto, s.nombre_producto, s.precio_producto, stock_producto, c.nom_categoria From (producto) s, (categoria) c Where s.id_categoria = c.id_categoria and s.ACTIVO='1' order by codigo_producto");
+            ResultSet rs = st.executeQuery("Select s.codigo_producto, s.nombre_producto, s.precio_producto, stock_producto, c.nom_categoria From (TBSKYLINK_PRODUCTO) s, (TBSKYLINK_CATEGORIA) c Where s.id_categoria = c.id_categoria and s.ACTIVO='1' order by codigo_producto");
             
             while (rs.next()) {                
                 Producto producto = new Producto();
@@ -55,7 +55,7 @@ public class MantenimientoProductosAdmSQLOra implements IMantenimientoProductosA
             Conexion conecta = new Conexion();
             Connection conn = conecta.getConnection();        
 
-            String sql = "insert into producto values (PRODUCTO_SEQ1.NEXTVAL,?,?,?,?,?)";
+            String sql = "insert into TBSKYLINK_PRODUCTO values (TBSKYLINK_PRODUCTO_SEQ1.NEXTVAL,?,?,?,?,?)";
             
             try {
              PreparedStatement ps = conn.prepareStatement(sql);
@@ -83,7 +83,7 @@ public class MantenimientoProductosAdmSQLOra implements IMantenimientoProductosA
             Conexion conecta = new Conexion();
             Connection conn = conecta.getConnection();        
 
-            String sql = "update producto set nombre_producto=?, precio_producto=?, stock_producto=?, id_categoria=? where codigo_producto=?";
+            String sql = "update TBSKYLINK_PRODUCTO set nombre_producto=?, precio_producto=?, stock_producto=?, id_categoria=? where codigo_producto=?";
             
             try {
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -111,7 +111,7 @@ public class MantenimientoProductosAdmSQLOra implements IMantenimientoProductosA
             Conexion conecta = new Conexion();
             Connection conn = conecta.getConnection();        
 
-            String sql = "update producto set activo=? where codigo_producto=?";
+            String sql = "update TBSKYLINK_PRODUCTO set activo=? where codigo_producto=?";
             try {
             PreparedStatement ps = conn.prepareStatement(sql);
                 ps.setString(1, "0");

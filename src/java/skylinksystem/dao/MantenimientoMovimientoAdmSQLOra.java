@@ -19,7 +19,7 @@ public class MantenimientoMovimientoAdmSQLOra implements IMantenimientoMovimient
 
         try {
             Statement st = conn.createStatement();
-            ResultSet rs = st.executeQuery("select d.tipo_documento as tipo_movimiento, m.numero_documento, m.fecha, u.rol_usuario, p.nombre_producto, m.cantidad from movimiento m, documento d, usuario u, producto p where m.id_movimiento=d.id_documento and m.usuario=u.id_usuario and m.codigo_producto=p.codigo_producto and m.activo='1'");
+            ResultSet rs = st.executeQuery("select d.tipo_documento as tipo_movimiento, m.numero_documento, m.fecha, u.usuario, p.nombre_producto, m.cantidad from TBSKYLINK_MOVIMIENTO m, TBSKYLINK_DOCUMENTO d, TBSKYLINK_USUARIO u, TBSKYLINK_PRODUCTO p where m.id_movimiento=d.id_documento and m.id_usuario=u.id_usuario and m.codigo_producto=p.codigo_producto and m.activo='1'");
 
             while (rs.next()) {
                 Movimiento movimiento = new Movimiento();
@@ -48,7 +48,7 @@ public class MantenimientoMovimientoAdmSQLOra implements IMantenimientoMovimient
         Conexion conecta = new Conexion();
         Connection conn = conecta.getConnection();
 
-        String sql = "insert into movimiento values (?,?,?,?,?,?,?)";
+        String sql = "insert into TBSKYLINK_MOVIMIENTO values (?,?,?,?,?,?,?)";
 
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -79,7 +79,7 @@ public class MantenimientoMovimientoAdmSQLOra implements IMantenimientoMovimient
         Conexion conecta = new Conexion();
         Connection conn = conecta.getConnection();
 
-        String sql = "update movimiento set id_movimiento=?, fecha=?, usuario=?, codigo_producto=?, cantidad=? where numero_documento=?";
+        String sql = "update TBSKYLINK_MOVIMIENTO set id_movimiento=?, fecha=?, usuario=?, codigo_producto=?, cantidad=? where numero_documento=?";
 
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -110,7 +110,7 @@ public class MantenimientoMovimientoAdmSQLOra implements IMantenimientoMovimient
         Conexion conecta = new Conexion();
         Connection conn = conecta.getConnection();
 
-        String sql = "update movimiento set activo=? where numero_documento=?";
+        String sql = "update TBSKYLINK_MOVIMIENTO set activo=? where numero_documento=?";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, "0");
